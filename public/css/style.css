@@ -1,0 +1,93 @@
+@font-face {
+    font-family: "comic";
+    src: url("");
+  }
+
+  :root {
+    --body:comic;
+    --gotB:gothamBold;
+  }
+  
+  .H1 {
+    font-size: 3em;
+    font-weight: bold;
+  }
+  
+  
+.note {
+  flex-wrap: wrap;
+  margin: 12px;
+  padding: 12px;
+  min-width: 30%;
+  max-width: 30%;
+  box-sizing: border-box;
+}
+
+.note textarea {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none;
+}
+.radioBtn {
+  margin-right: 5px;
+}
+
+.radioLbl {
+  margin-right: 12px;
+}
+
+.backgroundGreen {
+  background-color: rgba(132, 255, 85, 1);
+}
+
+.backgroundYellow {
+ background-color: rgba(252, 255, 90, 1);
+}
+
+.backgroundRed {
+  background-color: rgba(255, 90, 134, 1);
+}
+
+.backgroundBlue {
+  background-color: rgba(0, 166, 255, 1);
+}
+
+.noteStamp {
+  font-size: .5em;
+  font-style: italic;
+}
+
+.searchBar {
+  margin: 12px;
+}
+
+.searchBar label {
+  margin: 0 12px;
+}
+
+.searchBar input {
+  margin: 0 12px;
+}
+
+.searchDate {
+  max-width: 50px;
+}
+
+.searchDateYear {
+  max-width: 80px;
+}
+
+.btnLogin {
+
+  margin-top: 50px;
+}
+
+.btnLogin a {
+  color: #fff;
+}
