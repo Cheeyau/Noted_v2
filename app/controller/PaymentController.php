@@ -1,8 +1,4 @@
 <?php
-// require_once APPROOT . "/libraries/mollie_api/vendor/autoload.php";
-// require_once APPROOT . "/libraries/mollie_api/example/functions.php";
-// require_once APPROOT . "/libraries/mollie_api/example/initialize.php";
-
 require APPROOT . "/lib/mollie_api/vendor/autoload.php";
 require APPROOT . "/lib/mollie_api/example/functions.php";
 require APPROOT . "/lib/mollie_api/example/initialize.php";

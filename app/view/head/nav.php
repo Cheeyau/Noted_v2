@@ -36,6 +36,10 @@
                 echo '<button class="btn-primary btn-sm" type="submit" name="submit">Log out</button></form></li>';
             }
         ?> 
+
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo URLROOT ?>/PaymentController/PaymentIdeal">Donate</a>
+        </li>        
     </ul>
 </nav>
 <body class="container">

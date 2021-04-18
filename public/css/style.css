@@ -91,3 +91,23 @@
 .btnLogin a {
   color: #fff;
 }
+
+.errorMess {
+  display: block;
+  color: rgba(255, 90, 134, 1);
+}
+
+
+.inputBorderGreen {
+  background-color: greenyellow;
+  border: 2px solid rgba(132, 255, 85, 1);
+}
+
+.inputBorderRed {
+  background-color: orange;
+  border: 2px solid rgba(255, 90, 134, 1);
+}
+
+.form-control:focus {
+  background-color: none;
+}
