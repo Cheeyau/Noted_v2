@@ -9,6 +9,7 @@
     <p class="col-sm-12 align-self-center">Please fill in the credential to register.</p>
     <form id="registerUser" class="row col-sm-12 align-self-center" action="<?php echo URLROOT ?>/LoginController/registerUserCon" method="POST" onkeyup="checkRegisterData()" onsubmit="return validateRegister()" required>
         <label for="inputUser">User name: </label>
+        <label for="inputUser">(The length of the name must atleast be 3 character long)</label>
         <input class="row form-control" type="text" name="userName" id="inputUserRegis">
         
         <label for="inputMail">Email: </label>

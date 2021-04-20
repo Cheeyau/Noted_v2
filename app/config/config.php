@@ -52,4 +52,7 @@
     define('MAILPASSWORD', 'test');
     
     
+    define('REMOTEURLROOT', 'test');
+    
+    
     

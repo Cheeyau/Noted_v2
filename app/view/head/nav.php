@@ -30,16 +30,18 @@
                 echo URLROOT . '/UserController/editUser">';
                 echo $_SESSION['userName'].'</a></li>';
 
+                echo '<li class="nav-item"><a class="nav-link" href="';
+                echo URLROOT . '//PaymentController/proceedCheckOut">Donate';
+                echo '</a></li>';
+
                 // logout button
                 echo '<li class="nav-item"><form action="';
                 echo URLROOT . '/LoginController/logout" method="POST">';
                 echo '<button class="btn-primary btn-sm" type="submit" name="submit">Log out</button></form></li>';
+                
+                
             }
         ?> 
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo URLROOT ?>/PaymentController/PaymentIdeal">Donate</a>
-        </li>        
     </ul>
 </nav>
 <body class="container">
