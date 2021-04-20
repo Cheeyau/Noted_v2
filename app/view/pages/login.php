@@ -27,5 +27,4 @@
     <!-- <button type="button">
         <a href="<?php echo URLROOT ?>/LoginController/resetPasswordPage">Forgot your password? Reset it here!</a>
     </button> -->
-
 </main>

@@ -99,15 +99,24 @@
 
 
 .inputBorderGreen {
-  background-color: greenyellow;
-  border: 2px solid rgba(132, 255, 85, 1);
+  background-color: greenyellow !important;
+  border: 2px solid rgba(132, 255, 85, 1) !important; 
 }
 
 .inputBorderRed {
-  background-color: orange;
-  border: 2px solid rgba(255, 90, 134, 1);
+  background-color: orange !important;
+  border: 2px solid rgba(255, 90, 134, 1) !important;
 }
 
 .form-control:focus {
-  background-color: none;
+  background-color: rgba(0, 0, 0, 0.0);
+}
+
+
+.paymentSelector {
+  text-align: left;
+  display: block;
+  min-width: 200px;
+  min-height: 50px;
+  margin-bottom: 20px;
 }

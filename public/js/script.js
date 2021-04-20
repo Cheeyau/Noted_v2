@@ -77,15 +77,15 @@ function btnSwitch() {
   
   
 function paymentSwitch() {
-  let btns = document.querySelectorAll('.paySelector');
-  let radio = document.querySelectorAll('.paySelectorInput');
+  let btns = document.querySelectorAll('.paymentSelector');
+  let radio = document.querySelectorAll('.paymentSelectorRadio');
   
   btns.forEach(function(btn) {
       btn.addEventListener('click', () => {
       
-          btns.forEach(b => b.classList.remove('paySelectorSelect'));
+          btns.forEach(b => b.classList.remove('btn-primary'));
           
-          btn.classList.add('paySelectorSelect');
+          btn.classList.add('btn-primary');
           
           radio.forEach(t => t.checked = false);
           
@@ -100,7 +100,7 @@ function paymentSwitch() {
 }
   
 
-  // input field checker
+// input field checker
 function checkLoginData() {
   var name = document.getElementById("inputUser");
   var password = document.getElementById("inputPassword");
@@ -137,19 +137,28 @@ function checkInputPassword(input) {
   let inputValue = input.value;
   const regex = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
   if (inputValue.match(regex)) {    
-    console.log(inputValue);
     return true;
   } else {
     return false;
   }
 }
 
+
+// check input password field
+function checkInputNumb(input) {
+  let inputValue = input.value;
+  const regex = /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
+  if (inputValue.match(regex)) {    
+    return true;
+  } else {
+    return false;
+  }
+}
 // check input email field
 function checkInputEmail(input) {
   let inputValue = input.value;
   const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
   if (inputValue.match(regex)) {    
-    console.log(inputValue);
     return true;
   } else {
     return false;
@@ -225,4 +234,32 @@ function validateRegister() {
       }
     }
   }
+}
+
+
+// input field checker payment
+function checkDonateData() {
+  var price = document.getElementById("inputPrice");
+  price.addEventListener("keyup", function() {
+    if (checkInputNumb(price)) {    
+      price.classList.remove("inputBorderRed");
+      price.classList.add("inputBorderGreen");
+    } else {
+      price.classList.add("inputBorderRed");
+    }
+  })
+}
+
+// validate amount credential
+function validateDonate() {
+  var amount = document.getElementById("inputPrice");
+  var errorMess = document.getElementById("donateError");
+  errorMess.textContent = null;
+  if(!!amount.value.trim()) {
+    errorMess.textContent = "The amount can not be empty.";
+    return false;
+  } else if (!checkInputNumb(amount)) {    
+    errorMess.textContent = "The amount is not valid.";
+    return false;
+  } 
 }

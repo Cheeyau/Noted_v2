@@ -45,7 +45,7 @@ class PaymentController extends Autoloader {
 
     public function finishCheckOut() {
         if($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['orderId'] = $_GET['orderId'];
+            $data['donateIdId'] = $_GET['donateIdId'];
             $this->view('payment/paymentPayed', $data);
             
         }
@@ -74,10 +74,6 @@ class PaymentController extends Autoloader {
             $price = number_format((float) $_POST['totalPrice'], 2);;
             try {
                 $mollie = $this->ini();
-                // First, let the customer pick the bank in a simple HTML form. This step is actually optional.
-                
-                // Generate a unique order id for this example. It is important to include this unique attribute
-                // in the redirectUrl (below) so a proper return page can be shown to the customer.
                 
                 $tempId = $this->invoiceModel->makeInvoiceId();
                 if(empty($tempId->id)) {
@@ -85,37 +81,34 @@ class PaymentController extends Autoloader {
                 } else {
                     $tempId = $tempId->id;
                 }
-                $orderId = $tempId; 
+                $donateId = $tempId; 
                 $totalPrice = '';
+                
                 // Determine the url parts to these example files.
                 $payment = $mollie->payments->create([
                     "amount" => [
                         "currency" => "EUR",
-                        "value" => (string)$price, // You must send the correct number of decimals, thus we enforce the use of strings
+                        "value" => (string)$price,
                     ],
                     "method" => $selectPayment,
-                    "description" => "Haarlem Festival Ticket order #{$orderId}",
+                    "description" => "Haarlem Festival Ticket order #{$donateId}",
                     
                     // // test
                     // "redirectUrl" => REMOTEURLROOT . "/Payment/finishCheckOut?orderId={$orderId}",
                     // "webhookUrl" => REMOTEURLROOT . "/Webhook/checkWebhook",
                     
-                    "redirectUrl" => URLROOT . "/Payment/finishCheckOut?orderId={$orderId}",
+                    "redirectUrl" => URLROOT . "/Payment/finishCheckOut?orderId={$donateId}",
                     "webhookUrl" => URLROOT . "/Webhook/checkWebhook",
                     
                     
                     
                     "metadata" => [
-                        "order_id" => $orderId,
+                        "donate_id" => $donateId,
                     ],
                     "issuer" => ! empty($_POST["issuer"]) ? $_POST["issuer"] : null,
                 ]);
                 // In this example we store the order with its payment status in a database.
-                $this->invoiceController->makeInvoice();
-                /*
-                * Send the customer off to complete the payment.
-                * This request should always be a GET, thus we enforce 303 http response code
-                */
+                
                 header("Location: " . $payment->getCheckoutUrl(), true, 303);
             } catch (\Mollie\Api\Exceptions\ApiException $e) {
                 echo "API call failed: " . \htmlspecialchars($e->getMessage());
