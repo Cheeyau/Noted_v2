@@ -48,12 +48,15 @@ function ajaxCall(id, conUrl) {
   }
   xmlHttp.send(parameters);
 }
+
+function validateDeleteNote() {
   
+}
   
   
 function ShowPopUp() {
   var popup = document.getElementById("jazzPopUp");
-  popup.classList.toggle("showPopUp"); 
+  popup.classList.toggle("noteDeletePopUpConShow"); 
 }
   
   
@@ -165,21 +168,44 @@ function checkInputEmail(input) {
   }
 }
 
+//check if value is empty
+const isEmptyValue = (value) => {
+  if (value === '' || value === null || value === undefined) {
+      return true
+  } else {
+      return false
+  }
+}
+
 // validate login credential
 function validateLogin() {
   var name = document.getElementById("inputUser");
   var password = document.getElementById("inputPassword");;
   var errorMess = document.getElementById("loginError");
   errorMess.textContent = null;
-  if (!checkInputName(name)) {    
+  if(isEmptyValue(name.value)) {
     errorMess.textContent = "The user can not be empty.";
     return false;
-  } else {
-    if (!checkInputPassword(password)) {    
-      errorMess.textContent = "The password can not be empty.";
-      return false;
-    } 
   }
+  if(isEmptyValue(password.value)) {
+    errorMess.textContent = "The password can not be empty.";
+    return false;
+  }
+  if(isEmptyValue(password.value) && isEmptyValue(name.value)) {
+    errorMess.textContent = "The fields can not be empty.";
+    return false;
+  } else {
+    if (!checkInputName(name)) {    
+      errorMess.textContent = "The user is not valid.";
+      return false;
+    } else {
+      if (!checkInputPassword(password)) {    
+        errorMess.textContent = "The password is not valid.";
+        return false;
+      } 
+    }
+  }
+  
 }
 
 function checkRegisterData() {
@@ -215,22 +241,39 @@ function checkRegisterData() {
 
 // validate register credential
 function validateRegister() {
-  var name = document.getElementById("inputUserRegis");
-  var email = document.getElementById("inputEmailRegis");
-  var password = document.getElementById("inputPasswordRegis");;
-  var errorMess = document.getElementById("registerError");
+  let name = document.getElementById("inputUserRegis");
+  let email = document.getElementById("inputEmailRegis");
+  let password = document.getElementById("inputPasswordRegis");;
+  let errorMess = document.getElementById("registerError");
   errorMess.textContent = null;
-  if (!checkInputName(name)) {    
+  if(isEmptyValue(name.value)) {
     errorMess.textContent = "The user can not be empty.";
     return false;
+  } 
+  if(isEmptyValue(email.value)) {
+    errorMess.textContent = "The email can not be empty.";
+    return false;
+  } 
+  if(isEmptyValue(password.value)) {
+    errorMess.textContent = "The password can not be empty.";
+    return false;
+  }
+  if(isEmptyValue(password.value) && isEmptyValue(email.value) && isEmptyValue(name.value)) {
+    errorMess.textContent = "The fields can not be empty.";
+    return false;
   } else {
-    if (!checkInputEmail(email)) {    
-      errorMess.textContent = "The email can not be empty.";
+    if (!checkInputName(name)) {    
+      errorMess.textContent = "The user is not valid.";
       return false;
     } else {
-      if (!checkInputPassword(password)) {    
-        errorMess.textContent = "The password can not be empty.";
+      if (!checkInputEmail(email)) {    
+        errorMess.textContent = "The email is not valid.";
         return false;
+      } else {
+        if (!checkInputPassword(password)) {    
+          errorMess.textContent = "The password is not valid.";
+          return false;
+        }
       }
     }
   }
@@ -255,10 +298,10 @@ function validateDonate() {
   var amount = document.getElementById("inputPrice");
   var errorMess = document.getElementById("donateError");
   errorMess.textContent = null;
-  if(!!amount.value.trim()) {
+  if(isEmptyValue(amount.value)) {
     errorMess.textContent = "The amount can not be empty.";
     return false;
-  } else if (!checkInputNumb(amount)) {    
+  } else if   (!checkInputNumb(amount)) {    
     errorMess.textContent = "The amount is not valid.";
     return false;
   } 

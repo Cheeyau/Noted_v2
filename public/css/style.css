@@ -15,6 +15,7 @@
   
   
 .note {
+  position: relative;
   flex-wrap: wrap;
   margin: 12px;
   padding: 12px;
@@ -119,4 +120,32 @@
   min-width: 200px;
   min-height: 50px;
   margin-bottom: 20px;
+}
+
+.noteDeletePopUp {
+  position: absolute;
+  display: flex;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  display: none;
+}
+
+.noteDeletePopUpCon {
+  margin: auto;
+  font-size: .75em;
+  align-items: center;
+  position: relative;
+  width: 80%;
+  height: 80%;
+  padding: 20px 50px;
+  background-color: rgba(200, 200, 200, 1);
+}
+
+.noteDeletePopUpConShow {
+  visibility: visible;
+  display: block;
 }
