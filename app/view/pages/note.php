@@ -80,9 +80,9 @@
             <input type="hidden" name="noteId" value="<?php echo $note->NoteId ?>"> 
             <input type="hidden" name="action" value="_DELETE"> 
             
-            <button class="btn-secondary btn-sm " onclick="NoteDeletePopup()" type="submit" value="submit">Delete note</button>
+            <button class="btn-secondary btn-sm " onclick="NoteDeletePopup(<?php echo $note->NoteId ?>)" type="submit" value="submit">Delete note</button>
         </form>
-        <section class="noteDeletePopUp">
+        <section class="noteDeletePopUp notePopUpId">
             <section class="noteDeletePopUpCon">
                 <p>Are you sure you want to do delete this note? After deleting it, you can not recover it anymore.</p>
                 <button class="btn-secondary btn-sm">Yes</button>

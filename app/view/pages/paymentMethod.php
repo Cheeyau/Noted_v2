@@ -26,7 +26,7 @@
         </button>
         
         </span>
-        <label  for="inputPassword">How much do you want to donate?  </label>
+        <label  for="inputPayment">How much do you want to donate?  </label>
         <input class="col-sm-6 form-control" type="text" name="price" id="inputPrice">
         
         <button type="submit" class="col-sm-6  btn-sm btn-primary btnLogin">

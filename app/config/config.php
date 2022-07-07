@@ -32,7 +32,7 @@
     // Add your DB root
     define('DB_USER', 'root'); 
     //Add your DB password
-    define('DB_PASS', 'nv035Ny3ntqf351!@$!'); 
+    define('DB_PASS', 'root!'); 
     //Add your DB Name
     define('DB_NAME', 'Noted2'); 
     //APPROOT

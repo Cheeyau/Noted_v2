@@ -9,7 +9,7 @@
         //Get the users and count total notes they got
         public function getUsersModel() {
             $this->db->query("SELECT `Name`, `EmailAddress`, `UserRoll`, `Registration`, count(`Note`.`UserId` = `User`.`UserId`) AS Notes FROM `User`
-            INNER JOIN `Note` ON  `Note`.`UserId` = `User`.`UserId`
+            LEFT JOIN `Note` ON  `Note`.`UserId` = `User`.`UserId`
             GROUP BY `EmailAddress`;");
             $result = $this->db->resultSet();            
             return $result;
@@ -34,7 +34,7 @@
         public function searchUserRegistrationModel($date) {
             $this->db->query("SELECT `Name`, `EmailAddress`, `UserRoll`, `Registration`, count(`Note`.`UserId` = `User`.`UserId`) AS Notes 
             FROM `User`
-            INNER JOIN `Note` ON  `Note`.`UserId` = `User`.`UserId`
+            LEFT JOIN `Note` ON  `Note`.`UserId` = `User`.`UserId`
             WHERE `Registration` LIKE :date 
             GROUP BY `EmailAddress`;");
             $addWildCard = $date . '%';
@@ -50,7 +50,7 @@
         public function searchUserNameModel($name) {
             $this->db->query("SELECT `Name`, `EmailAddress`, `UserRoll`, `Registration`, count(`Note`.`UserId` = `User`.`UserId`) AS Notes 
             FROM `User`
-            INNER JOIN `Note` ON  `Note`.`UserId` = `User`.`UserId`
+            LEFT JOIN `Note` ON  `Note`.`UserId` = `User`.`UserId`
             WHERE `Name` LIKE :name 
             GROUP BY `EmailAddress`;");
             $addWildCard = $name . '%';
@@ -66,7 +66,7 @@
         public function searchUserEmailModel($name) {
             $this->db->query("SELECT `Name`, `EmailAddress`, `UserRoll`, `Registration`, count(`Note`.`UserId` = `User`.`UserId`) AS Notes 
             FROM `User`
-            INNER JOIN `Note` ON  `Note`.`UserId` = `User`.`UserId`
+            LEFT JOIN `Note` ON  `Note`.`UserId` = `User`.`UserId`
             WHERE `EmailAddress` LIKE :email 
             GROUP BY `EmailAddress`;");
             $addWildCard = $name . '%';

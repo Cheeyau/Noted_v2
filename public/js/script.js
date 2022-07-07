@@ -58,7 +58,10 @@ function ShowPopUp() {
   var popup = document.getElementById("jazzPopUp");
   popup.classList.toggle("noteDeletePopUpConShow"); 
 }
+
+function NoteDeletePopup() {
   
+}
   
 function btnSwitch() {
   let btns = document.querySelectorAll('#jazzBtn1, #jazzBtn2, #jazzBtn3');
@@ -103,11 +106,11 @@ function paymentSwitch() {
 }
   
 
-// input field checker
+// input field checker login
 function checkLoginData() {
   var name = document.getElementById("inputUser");
   var password = document.getElementById("inputPassword");
-  name.addEventListener("keyup", function() {
+  name.addEventListener("keydown", function() {
     if (checkInputName(name)) {    
       name.classList.remove("inputBorderRed");
       name.classList.add("inputBorderGreen");
@@ -115,7 +118,7 @@ function checkLoginData() {
       name.classList.add("inputBorderRed");
     }
   })
-  password.addEventListener("keyup", function() {
+  password.addEventListener("keydown", function() {
     if (checkInputPassword(password)) {    
       password.classList.remove("inputBorderRed");
       password.classList.add("inputBorderGreen");
@@ -146,7 +149,6 @@ function checkInputPassword(input) {
   }
 }
 
-
 // check input password field
 function checkInputNumb(input) {
   let inputValue = input.value;
@@ -157,6 +159,7 @@ function checkInputNumb(input) {
     return false;
   }
 }
+
 // check input email field
 function checkInputEmail(input) {
   let inputValue = input.value;
@@ -205,14 +208,13 @@ function validateLogin() {
       } 
     }
   }
-  
 }
-
+// validate register credential input fields
 function checkRegisterData() {
   var name = document.getElementById("inputUserRegis");
   var email = document.getElementById("inputEmailRegis");
   var password = document.getElementById("inputPasswordRegis");
-  name.addEventListener("keyup", function() {
+  name.addEventListener("keydown", function() {
     if (checkInputName(name)) {    
       name.classList.remove("inputBorderRed");
       name.classList.add("inputBorderGreen");
@@ -220,7 +222,7 @@ function checkRegisterData() {
       name.classList.add("inputBorderRed");
     }
   })
-  email.addEventListener("keyup", function() {
+  email.addEventListener("keydown", function() {
     if (checkInputEmail(email)) {    
       email.classList. remove("inputBorderRed");
       email.classList.add("inputBorderGreen");
@@ -228,7 +230,7 @@ function checkRegisterData() {
       email.classList.add("inputBorderRed");
     }
   })
-  password.addEventListener("keyup", function() {
+  password.addEventListener("keydown", function() {
     if (checkInputPassword(password)) {    
       password.classList.remove("inputBorderRed");
       password.classList.add("inputBorderGreen");
@@ -279,11 +281,10 @@ function validateRegister() {
   }
 }
 
-
 // input field checker payment
 function checkDonateData() {
   var price = document.getElementById("inputPrice");
-  price.addEventListener("keyup", function() {
+  price.addEventListener("keydown", function() {
     if (checkInputNumb(price)) {    
       price.classList.remove("inputBorderRed");
       price.classList.add("inputBorderGreen");

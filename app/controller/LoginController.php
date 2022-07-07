@@ -32,14 +32,7 @@
         public function logout() {
             $data = [];
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // if(isset($_SESSION['userId'])) {
-                    // // Working in test environment but not in live  
-                    // header("Cache-Control: no-cache, must-revalidate");
-                    // header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                    // header("Content-Type: application/xml; charset=utf-8");
-                    // header('location: ' . URLROOT . '/LoginController/login');
-                    // exit();
-                // } 
+                
                 unset($_COOKIE['userId']); 
                 unset($_SESSION['userId']); 
                 session_destroy();
@@ -260,7 +253,7 @@
     } 
 
     private function mailBody() {
-
+        
     }
 
     public function confirmPasswordReset() {

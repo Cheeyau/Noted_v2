@@ -11,6 +11,10 @@ class PaymentController extends Autoloader {
         
         // $this->invoiceController = new InvoiceController();
     }
+    
+    public function index() {
+        
+    }
 
     public function proceedCheckOut() {
         if(!isset($_SESSION['userId'])) {

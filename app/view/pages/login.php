@@ -9,9 +9,11 @@
     <form class="col-sm-12 align-self-center" name="loginForm" action="<?php echo URLROOT ?>/LoginController/login" method="POST" onkeyup="checkLoginData()" onsubmit="return validateLogin()" required>
         <label  for="inputUser">User: </label>
         <input class=" form-control" type="text" name="userName" id="inputUser">
+        
         <label  for="inputPassword">Password: </label>
         <input class=" form-control" type="password" name="userPassword" id="inputPassword">
         <button class="btnLogin btn-primary btn-sm" type="submit" value="submit">Login</button>
+        
         <span id="loginError" class="errorMess" >
         <?php 
         if(!empty($data['errorMess'])) {
