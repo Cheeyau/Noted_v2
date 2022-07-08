@@ -32,13 +32,13 @@
     // Add your DB root
     define('DB_USER', 'root'); 
     //Add your DB password
-    define('DB_PASS', 'root!'); 
+    define('DB_PASS', 'root'); 
     //Add your DB Name
     define('DB_NAME', 'Noted2'); 
     //APPROOT
     define('APPROOT', dirname(dirname(__FILE__)));
     //URLROOT (Dynamic links)
-    define('URLROOT', 'http://localhost:8080/noted2');
+    define('URLROOT', 'http://localhost:/noted2');
     //Sitename
     define('SITENAME', 'Noted V2!');
 
