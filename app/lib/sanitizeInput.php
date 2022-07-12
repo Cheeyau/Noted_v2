@@ -1,7 +1,7 @@
 <?php 
     // Sanitize and Validate name
     function filterName(string $name) {
-        $name = filter_var(trim($name), FILTER_SANITIZE_STRING);
+        $name = filter_var(trim($name), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if(filter_var($name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))) {
             return $name;
         } else{
@@ -21,7 +21,7 @@
     
     // Sanitize string
     function filterString(string $field){
-        $field = filter_var(trim($field), FILTER_SANITIZE_STRING);
+        $field = filter_var(trim($field), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if(!empty($field)) {
             return $field;
         } else{
