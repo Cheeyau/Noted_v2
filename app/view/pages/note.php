@@ -103,3 +103,4 @@
         $('.noteArea').autogrow({vertical: true, horizontal: false});
     });
 </script>
+<script src="<?php echo URLROOT ?>/public/js/note.js"></script>

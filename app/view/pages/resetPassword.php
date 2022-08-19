@@ -15,3 +15,4 @@
         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
     </form>    
 </main>
+<script src="<?php echo URLROOT ?>/public/js/login.js"></script>

@@ -8,8 +8,12 @@
 
         // initiate user view with data
         public function index() {
-            $data = [];
-            $this->view('pages/index', $data);
+            if(isset($_SESSION['userId'])) {
+                $data = [];
+                $this->view('pages/index', $data = []);
+            } else {
+                $this->view('pages/login', $data = []);
+            }   
         }
         
         // get users from db
@@ -18,6 +22,7 @@
             $data = ['users' => $users, 'errorMess' =>''];
             $this->view('/pages/users', $data);
         }
+
         // Edit logged in user information
         public function editUser() {
             $data = [
@@ -75,16 +80,19 @@
             }
             $this->view('pages/editUser', $data);
         }
+
         // Set user session
         private function setSession($user, string $hashPassword) {
             $_SESSION["userName"] = $user['userName'];
             $_SESSION["userEmail"] = $user['userEmail'];
             $_SESSION["userPass"] = $hashPassword;
         }
+
         // hash password and salt with sha512
         public function hashPassword(string $passwordAndSalt) {
             return hash('sha512', $passwordAndSalt);
         }
+        
         // search user on input; name, email or registration date
         public function searchUserCon() {
             $data = [ 'users' => '', 'errorMess'=> ''];

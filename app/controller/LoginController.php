@@ -3,24 +3,27 @@
     class LoginController extends AutoLoader {
         public function __construct() {
             $this->loginModel = $this->model('LoginModel');
-            $data = $this->emptyData();
-            
+            $data = $this->emptyData();            
         }
+
         // page for loginpage
         public function index() {
             $data = $this->emptyData();
             $this->view('/pages/login', $data);
         }
+
         // page for resetpassword
         public function resetPasswordPage() {
             $data = $this->emptyData();
             $this->view('/pages/resetPassword', $data);
         }
+
         // page for register
         public function registerUserPage() {
             $data = $this->emptyData();
             $this->view('/pages/registerUser', $data);
         }
+
         // Empty array 
         private function emptyData() {
             $data = [
@@ -28,6 +31,7 @@
             ];
             return $data;
         }
+
         // log out user
         public function logout() {
             $data = [];
@@ -39,6 +43,7 @@
             }
             $this->view('/pages/login', $data);
         }
+
         // login validation
         public function login() {
             $data = $this->emptyData();
@@ -168,6 +173,7 @@
             }    
         $this->view('/pages/registerUser', $data);
     }
+
     // generate random salt
     private function saltShaker() {
         $rnd = rand(0, 10);
@@ -206,6 +212,7 @@
         }
         return $salt;
     }
+    
     // send reset link by mail
     public function resetPassword() {
         $data = $this->emptyData();
@@ -225,12 +232,7 @@
                             $data['userEmail'] = trim($_POST['userEmail']);
                             $token = random_bytes(32);
 
-
-
-
-
-
-
+                            
                             $tempResponse = $this->loginModel->updateUserTokenModel($data['userEmail'], $token);
                             if($tempResponse === true) {
                                 $url = sprintf( APPROOT . '/pages/resetPassword', http_build_query([

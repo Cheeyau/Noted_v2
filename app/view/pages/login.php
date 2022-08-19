@@ -26,7 +26,8 @@
     <button type="button" class="col-sm-6 btn-primary btn-sm btnLogin">
         <a href="<?php echo URLROOT ?>/LoginController/registerUserPage">Don't have an account? Create one here!</a>
     </button>
-    <!-- <button type="button">
+    <button type="button">
         <a href="<?php echo URLROOT ?>/LoginController/resetPasswordPage">Forgot your password? Reset it here!</a>
-    </button> -->
+    </button>
 </main>
+<script src="<?php echo URLROOT ?>/public/js/login.js"></script>

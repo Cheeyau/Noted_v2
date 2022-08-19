@@ -13,5 +13,3 @@
         <script src="<?php echo URLROOT ?>/public/js/jquery.ns-autogrow-1.1.6/dist/jquery.ns-autogrow.min.js"></script>
         <!-- site -->
         <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style.css">
-        <script src="<?php echo URLROOT ?>/public/js/script.js"></script>
-    

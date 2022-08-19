@@ -58,3 +58,5 @@ function determineRoll($data) {
         </form>
     </section>
 </main>
+
+<script src="<?php echo URLROOT ?>/public/js/user.js"></script>

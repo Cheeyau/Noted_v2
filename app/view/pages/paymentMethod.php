@@ -39,7 +39,5 @@
             } 
         ?>
     </form>
-
-    
-    
 </main>
+<script src="<?php echo URLROOT ?>/public/js/payment.js"></script>

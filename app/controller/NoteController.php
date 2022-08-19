@@ -1,23 +1,32 @@
 <?php
     class NoteController extends AutoLoader {
+        
         public function __construct() {
             $this->noteModel = $this->model('NoteModel');
         }
         // Call get note function 
         public function index() {
-            $this->getNotesCon();
+            if(isset($_SESSION['userId'])) {
+                $data = [];
+                $this->getNotesCon();
+            } else {
+                $this->view('pages/login', $data = []);
+            }
         }
+
         // Get notes from user by id from the db
         public function getNotesCon() {
             $notes =  $this->noteModel->getNotesModel((int)$_SESSION['userId']);
             $data = ['notes' => $notes, 'errorMess' => '']; 
             $this->view('/pages/note', $data);
         }
+
         private function emptyData() {
             $data = ['notes' => array('userId' => '', 'noteId' => '', 'textContent' => '', 'colorId' => '', 'createStamp' => ''), 'errorMess' => ''
             ];
             return $data;
         }
+
         // Update note by id
         public function updateNoteCon() {
             $data = $this->emptyData();
@@ -45,6 +54,7 @@
             }
             $this->reloadPage($data);
         }
+
         // Delete note by id
         public function deleteNoteCon() {
             $data = $this->emptyData();
@@ -66,6 +76,7 @@
             }
             $this->reloadPage($data);
         }
+
         // Create note
         public function createNoteCon() {
             $data = $this->emptyData();
@@ -92,6 +103,7 @@
             }
             $this->reloadPage($data);
         }
+        
         // Reopen page 
         private function reloadPage($data) {
             $tempErrorMess = $data['errorMess'];

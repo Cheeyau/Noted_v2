@@ -2,7 +2,7 @@
     // core load
     require_once '../app/core/Url.php';
     // db connection 
-    require_once '../app/core/Datebase.php';
+    require_once '../app/core/Database.php';
     // autoload
     require_once '../app/core/AutoLoader.php';
     // configuration and helpers

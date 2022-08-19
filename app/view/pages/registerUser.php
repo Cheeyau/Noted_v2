@@ -24,3 +24,4 @@
         <span id="registerError" class="errorMess " ><?php echo $data["errorMess"] ?></span>
     </form>    
 </main>
+<script src="<?php echo URLROOT ?>/public/js/register.js"></script>

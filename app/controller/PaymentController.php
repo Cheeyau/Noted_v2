@@ -2,14 +2,11 @@
 require_once APPROOT . "/lib/mollie_api/vendor/autoload.php";
 require_once APPROOT . "/lib/mollie_api/src/CompatibilityChecker.php";
 require_once APPROOT . "/lib/mollie_api/src/MollieApiClient.php";
-// require_once APPROOT . '/controllers/invoiceController.php';
 
-        
+
 class PaymentController extends Autoloader {
 
     public function __construct() {
-        
-        // $this->invoiceController = new InvoiceController();
     }
     
     public function index() {
