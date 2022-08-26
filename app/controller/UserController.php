@@ -10,17 +10,17 @@
         public function index() {
             if(isset($_SESSION['userId'])) {
                 $data = [];
-                $this->view('pages/index', $data = []);
+                $this->getUserCon();
             } else {
                 $this->view('pages/login', $data = []);
             }   
         }
         
         // get users from db
-        public function getUserCon() {
+        private function getUserCon() {
             $users = $this->userModel->getUsersModel();
             $data = ['users' => $users, 'errorMess' =>''];
-            $this->view('/pages/users', $data);
+            $this->view('pages/users', $data);
         }
 
         // Edit logged in user information
@@ -89,7 +89,7 @@
         }
 
         // hash password and salt with sha512
-        public function hashPassword(string $passwordAndSalt) {
+        private function hashPassword(string $passwordAndSalt) {
             return hash('sha512', $passwordAndSalt);
         }
         
