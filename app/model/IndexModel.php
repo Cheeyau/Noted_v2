@@ -1,8 +1,9 @@
 <?php
     class IndexModel {
-        private $db;
+        private Database $db;
+        
         // load index page
         public function __construct() {
-            $this->db = new Database;
+            $this->db = new Database();
         }
     }

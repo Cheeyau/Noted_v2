@@ -36,9 +36,7 @@
         public function logout() {
             $data = [];
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                
-                unset($_COOKIE['userId']); 
-                unset($_SESSION['userId']); 
+                unset($_SESSION['userId']);
                 session_destroy();
             }
             $this->view('/pages/login', $data);
@@ -47,48 +45,49 @@
         // login validation
         public function login() {
             $data = $this->emptyData();
-            if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
-                // check recaptcha
-                $recaptchaCheck = checkRecaptcha($_POST['recaptcha_response']);
-                if(isset($recaptchaCheck->score)) {
-                    if($recaptchaCheck->score >= 0.5 && $recaptchaCheck->success) {
-                        // Validate inlog
-                        if(empty($_POST['userName'])) {
-                            $data['errorMess'] = "Please enter your user name.";
-                        } else {
-                            $_POST['userName'] = filterName($_POST['userName']);
-                            // check sanitize of name
-                            if($_POST['userName'] == false) {
-                                $data['ErrorMess'] = "Please enter a valid user name.";
-                            } else {
-                                $data['userName'] = trim($_POST['userName']);
-                                // empty field
-                                if(empty($_POST["userPassword"])) {
-                                    $data['errorMess'] = "Please enter your password.";
-                                } else {
-                                    $_POST['userPassword'] = filterString($_POST['userPassword']);
-                                    // check sanitize password
-                                    if($_POST['userPassword'] == false){
-                                        $data['errorMess'] = "Please enter a valid password.";
-                                    } else {
-                                        // push user to db layer 
-                                        $data['userPass'] = trim($_POST['userPassword']);
-                                        $tempUser = $this->loginModel->checkLoginModel($data['userName'], $data['userPass']);
-                                        if ($tempUser !== false || $tempUser === null) {
-                                            $this->setSession($tempUser);
-                                        } else {
-                                            $data['errorMess'] = "The password and user combination is not valid.";
-                                        }
-                                    } 
-                                }
-                            }
-                        }
+            if(!$_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['recaptcha_response'])) {
+                $data['errorMess'] = "Cant process request, please try again.";
+            }
+            // check recaptcha
+            $recaptchaCheck = checkRecaptcha($_POST['recaptcha_response']);
+            if(isset($recaptchaCheck->score)) {
+                if($recaptchaCheck->score <= 0.5 && $recaptchaCheck->failed) {
+                    // Validate inlog
+                    $data['errorMess'] = "The captcha failed, please try again.";
+                }
+                
+                // check sanitize of name
+                $userName = filterName($_POST['userName']);
+                if(empty($userName)) {
+                    $data['errorMess'] = "Please enter your user name.";
+                }
+                
+                if($userName === false) {
+                    $data['ErrorMess'] = "Please enter a valid user name.";
+                } 
+                $data['userName'] = trim($userName);
+                
+                // empty field
+                if(empty($_POST["userPassword"])) {
+                    $data['errorMess'] = "Please enter your password.";
+                } 
+                
+                // check sanitize password
+                $userPassword = filterString($_POST['userPassword']);
+                if($userPassword === false){
+                    $data['errorMess'] = "Please enter a valid password.";
+                }
+                 
+                if(empty($data['errorMess'])) {
+                // push user to db layer 
+                $data['userPass'] = trim($_POST['userPassword']);
+                $tempUser = $this->loginModel->checkLoginModel($data['userName'], $data['userPass']);
+                if ($tempUser !== false || $tempUser === null) {
+                    $this->setSession($tempUser);
                     } else {
-                        $data['errorMess'] = "The captcha failed, please try again.";
+                        $data['errorMess'] = "The password and user combination is not valid.";
                     }
                 }
-            } else {
-                $data['errorMess'] = "The captcha failed, please try again.";
             }
             $this->view('/pages/login', $data);
         }
@@ -110,67 +109,66 @@
         // register user
         public function registerUserCon() {
             $data = $this->emptyData();
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
-                // recaptcha check
-                $recaptchaCheck = checkRecaptcha($_POST['recaptcha_response']);
-                if(isset($recaptchaCheck->score)) {
-                    if ($recaptchaCheck->score >= 0.5 && $recaptchaCheck->success) {
-                        // Validate inlog
-                        if(empty($_POST['userName'])) {
-                            $data['errorMess'] = "Please enter your user name.";
-                        } else {
-                            $_POST['userName'] = filterName($_POST['userName']);
-                            // check sanitize of name
-                            if($_POST['userName'] === false) {
-                                $data['ErrorMess'] = "Please enter a valid user name.";
-                            } else {
-                                $data['userName'] = trim($_POST['userName']);
-                                // empty email
-                                if(empty($_POST['userEmail'])) {
-                                    $data['errorMess'] = "Please enter your email."; 
-                                } else {
-                                    $_POST['userEmail'] = filterEmail($_POST['userEmail']);
-                                        // check sanitize password
-                                    if($_POST['userEmail'] === false) { 
-                                        $data['errorMess'] = "Please enter a valid email.";
-                                    } else {
-                                        $data['userEmail'] = trim($_POST['userEmail']);
-                                        if(empty($_POST["userPassword"])) {
-                                            $data['errorMess'] = "Please enter your password.";
-                                        } else {
-                                            $_POST['userPassword'] = filterString($_POST['userPassword']);
-                                            // check sanitize password
-                                            if($_POST['userPassword'] === false) {
-                                                $data['errorMess'] = "Please enter a valid password.";
-                                            } else {
-                                                // push user to db layer 
-                                                $data['userPass'] = trim($_POST['userPassword']);
-                                                $tempSalt = $this->saltShaker();
-                                                $tempUser = $this->loginModel->registerUserModel(
-                                                    $data['userName'],
-                                                    $data['userEmail'], 
-                                                    $data['userPass'],
-                                                    $tempSalt
-                                                );
-                                                if ($tempUser !== false || $tempUser !== null) {
-                                                    $this->setSession($tempUser);
-                                                } else {
-                                                    $data['errorMess'] = "Something went wrong, please try it again";
-                                                }
-                                            } 
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        
-                    } else {
-                        $data['errorMess'] = "The captcha failed, please try again.";
-                    }
-                }
-            } else {
-                $data['errorMess'] = "The captcha failed, please try again.";
+            if (!$_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['recaptcha_response'])) {
+                $data['errorMess'] = "Cant process request, please try again.";
             }    
+            
+            $recaptchaCheck = checkRecaptcha($_POST['recaptcha_response']);
+            if(isset($recaptchaCheck->score)) {
+                if ($recaptchaCheck->score >= 0.5 && $recaptchaCheck->success) {
+                    // Validate login
+                    if(empty($_POST['userName'])) {
+                        $data['errorMess'] = "Please enter your user name.";
+                    }
+                    
+                    // check sanitize of name
+                    $_POST['userName'] = filterName($_POST['userName']);
+                    if($_POST['userName'] === false) {
+                        $data['ErrorMess'] = "Please enter a valid user name.";
+                    }
+                    
+                    // empty username
+                    $data['userName'] = trim($_POST['userName']);
+                    if(empty($_POST['userEmail'])) {
+                        $data['errorMess'] = "Please enter your email."; 
+                    }
+                    
+                    //filter user email
+                    $_POST['userEmail'] = filterEmail($_POST['userEmail']);
+                    if($_POST['userEmail'] === false) { 
+                        $data['errorMess'] = "Please enter a valid email.";
+                    }
+                    $data['userEmail'] = trim($_POST['userEmail']);
+                    if(empty($_POST["userPassword"])) {
+                        $data['errorMess'] = "Please enter your password.";
+                    }
+
+                    // check sanitize password
+                    $_POST['userPassword'] = filterString($_POST['userPassword']);
+                    if($_POST['userPassword'] === false) {
+                        $data['errorMess'] = "Please enter a valid password.";
+                    } 
+                    
+                    if(empty($data['errorMess'])) {
+                        // push user to db layer 
+                        $data['userPass'] = trim($_POST['userPassword']);
+                        $tempSalt = $this->saltShaker();
+                        $tempUser = $this->loginModel->registerUserModel(
+                            $data['userName'],
+                            $data['userEmail'], 
+                            $data['userPass'],
+                            $tempSalt
+                        );
+                        if ($tempUser !== false || $tempUser !== null) {
+                            $this->setSession($tempUser);
+                        } else {
+                            $data['errorMess'] = "Something went wrong, please try it again";
+                        }
+                    }
+                } else {
+                    $data['errorMess'] = "The captcha failed, please try again.";
+                }
+            }
         $this->view('/pages/registerUser', $data);
     }
 
@@ -232,12 +230,16 @@
                             $data['userEmail'] = trim($_POST['userEmail']);
                             $token = random_bytes(32);
 
+                            //continue 
                             
                             $tempResponse = $this->loginModel->updateUserTokenModel($data['userEmail'], $token);
                             if($tempResponse === true) {
                                 $url = sprintf( APPROOT . '/pages/resetPassword', http_build_query([
                                     'validator' => bin2hex($token)
                                 ]));
+                                
+                                // continue
+
                                 $mail = new Mailer();
                                 // $mail->SendMail();
                                 $data['errorMess'] = "The reset link has been send to the email that is filled in.";
@@ -256,9 +258,13 @@
 
     private function mailBody() {
         
+        // continue
+
     }
 
     public function confirmPasswordReset() {
         
+        // continue
+
     }
 }

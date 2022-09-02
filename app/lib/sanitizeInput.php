@@ -20,7 +20,7 @@
     }
     
     // Sanitize string
-    function filterString(string $field){
+    function filterString(string $field) {
         $field = filter_var(trim($field), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if(!empty($field)) {
             return $field;

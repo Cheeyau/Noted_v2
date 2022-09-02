@@ -1,9 +1,9 @@
 <?php
     class NoteModel {
-        private $db;
+        private Database $db;
         
         public function __construct() {
-            $this->db = new Database;
+            $this->db = new Database();
         }
         // create note by first binding parameters and type, then get notes by user id in db
         public function getNotesModel(int $userId) {

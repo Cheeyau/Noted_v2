@@ -36,45 +36,46 @@
                 // check name and validation
                 if(empty($_POST['inputName'])) {
                     $data['errorMess'] = "Please enter a new name to change.";
-                } else {
-                    $_POST['inputName'] = filterString($_POST['inputName']);
-                    if($_POST['inputName']=== false) {
-                        $data['errorMess'] = "Please enter a valid new name to change.";
-                    } else {
-                        $data['userName'] = trim($_POST['inputName']);
-                        // check email and validation
-                        if(empty($_POST['inputEmail'])) {
-                            $data['errorMess'] = "Please enter a new name to change.";
-                        } else {
-                            $_POST['inputEmail'] = filterEmail($_POST['inputEmail']);
-                            if($_POST['inputEmail']=== false) {
-                                $data['errorMess'] = "Please enter a valid new name to change.";
-                            } else {
-                                $data['userEmail'] = trim($_POST['inputEmail']);
-                                // check password and validation
-                                if(empty($_POST['inputPassword'])) {
-                                    $data['errorMess'] = "Please enter a new password to change.";
-                                } else {
-                                    $_POST['inputPassword'] = filterString($_POST['inputPassword']);
-                                    if($_POST['inputPassword']=== false) {
-                                        $data['errorMess'] = "Please enter a valid new password to change.";
-                                    } else {
-                                        $tempPassword = trim($_POST['inputPassword']);
-                                        // hash password and send to db
-                                        $hashPassword = $this->hashPassword($tempPassword.$_SESSION['userSalt']);
-                                        
-                                        $tempEditUser = $this->userModel->updateUserModel($data['userId'], $data['userName'], $data['userEmail'], $hashPassword);
-                                        if($tempEditUser === true) {
-                                            $data['errorMess'] = "The changes is saved.";
-                                            $this->setSession($data, $hashPassword);
-                                        } else {
-                                            $data['errorMess'] = 'Something went wrong, please try again.';
-                                        }
-                                    }
-                                }
+                }
 
-                            }
-                        }
+                $_POST['inputName'] = filterString($_POST['inputName']);
+                if($_POST['inputName']=== false) {
+                    $data['errorMess'] = "Please enter a valid new name to change.";
+                }
+
+                $data['userName'] = trim($_POST['inputName']);
+                // check email and validation
+                if(empty($_POST['inputEmail'])) {
+                    $data['errorMess'] = "Please enter a new name to change.";
+                } 
+                
+                $_POST['inputEmail'] = filterEmail($_POST['inputEmail']);
+                if($_POST['inputEmail']=== false) {
+                    $data['errorMess'] = "Please enter a valid new name to change.";
+                } 
+
+                // check password and validation
+                $data['userEmail'] = trim($_POST['inputEmail']);
+                if(empty($_POST['inputPassword'])) {
+                    $data['errorMess'] = "Please enter a new password to change.";
+                } 
+
+                $_POST['inputPassword'] = filterString($_POST['inputPassword']);
+                if($_POST['inputPassword']=== false) {
+                    $data['errorMess'] = "Please enter a valid new password to change.";
+                } 
+
+                if(empty($data['errorMes'])) {
+                    $tempPassword = trim($_POST['inputPassword']);
+                    // hash password and send to db
+                    $hashPassword = $this->hashPassword($tempPassword.$_SESSION['userSalt']);
+                    
+                    $tempEditUser = $this->userModel->updateUserModel($data['userId'], $data['userName'], $data['userEmail'], $hashPassword);
+                    if($tempEditUser === true) {
+                        $data['errorMess'] = "The changes is saved.";
+                        $this->setSession($data, $hashPassword);
+                    } else {
+                        $data['errorMess'] = 'Something went wrong, please try again.';
                     }
                 }
             }

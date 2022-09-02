@@ -1,9 +1,9 @@
 <?php 
     class UserModel {
-        private $db;
+        private Database $db;
         
         public function __construct() {
-            $this->db = new Database;
+            $this->db = new Database();
         }
         
         //Get the users and count total notes they got

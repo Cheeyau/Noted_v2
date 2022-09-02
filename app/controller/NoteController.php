@@ -101,10 +101,13 @@
                     }
                 }
             }
+
+            // AJAX call in from JS
+
             $this->reloadPage($data);
         }
         
-        // Reopen page 
+        // Reopen page Decapricated after AJAX call
         private function reloadPage($data) {
             $tempErrorMess = $data['errorMess'];
             $notes =  $this->noteModel->getNotesModel($_SESSION['userId']);
