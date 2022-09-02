@@ -22,8 +22,7 @@
         }
 
         private function emptyData() {
-            $data = ['notes' => array('userId' => '', 'noteId' => '', 'textContent' => '', 'colorId' => '', 'createStamp' => ''), 'errorMess' => ''
-            ];
+            $data = ['notes' => array('userId' => '', 'noteId' => '', 'textContent' => '', 'colorId' => '', 'createStamp' => ''), 'errorMess' => ''];
             return $data;
         }
 
@@ -52,6 +51,8 @@
                     }
                 }
             }
+
+            // AJAX call in JS
             $this->reloadPage($data);
         }
 
@@ -59,21 +60,23 @@
         public function deleteNoteCon() {
             $data = $this->emptyData();
             $data['errorMess'] = ''; 
-            if(isset($_GET['action'])) {
-                if ($_GET['action'] === '_DELETE') {
-                    if(empty($_GET['noteId'])) {
-                        $data['errorMess'] = "The note could not been found, please refresh.";
+            if(isset($_GET['action']) && $_GET['action'] === '_DELETE') {
+                if(empty($_GET['noteId'])) {
+                    $data['errorMess'] = "The note could not been found, please refresh.";
+                } 
+                
+                if(empty($data['errorMess'])) {
+                    $id = $_GET['noteId'];
+                    $tempDelete = $this->noteModel->deleteNotesModel($id);
+                    if($tempDelete === true) {
+                        $data['errorMess'] = "The note is deleted.";
                     } else {
-                        $id = $_GET['noteId'];
-                        $tempDelete = $this->noteModel->deleteNotesModel($id);
-                        if($tempDelete === true) {
-                            $data['errorMess'] = "The note is deleted.";
-                        } else {
-                            $data['errorMess'] = "Something went wrong please try again.";
-                        }
+                        $data['errorMess'] = "Something went wrong please try again.";
                     }
                 }
             }
+
+            // AJAX call in JS
             $this->reloadPage($data);
         }
 
@@ -84,30 +87,30 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if(empty($_POST['textContent'])) {
                     $data['errorMess'] = "Please enter some content in the note.";
-                } else {
-                    $_POST['textContent'] = filterString($_POST['textContent']);
-                    if($_POST['textContent']=== false) {
-                        $data['errorMess'] = "Please enter valid content in the note.";
+                }
+                
+                $_POST['textContent'] = filterString($_POST['textContent']);
+                if($_POST['textContent']=== false) {
+                    $data['errorMess'] = "Please enter valid content in the note.";
+                } 
+
+                if(empty($data['errorMess'])) {
+                    $data['textContent'] = trim($_POST['textContent']);
+                    $data['userId'] = $_SESSION['userId'];
+                    $data['colorId'] = $_POST['colorId'];
+                    $tempNote = $this->noteModel->createNoteModel($data['userId'], $data['textContent'], $data['colorId']);
+                    if($tempNote === true) {
+                        $data['errorMess'] = 'The note has been created.';
                     } else {
-                        $data['textContent'] = trim($_POST['textContent']);
-                        $data['userId'] = $_SESSION['userId'];
-                        $data['colorId'] = $_POST['colorId'];
-                        $tempNote = $this->noteModel->createNoteModel($data['userId'], $data['textContent'], $data['colorId']);
-                        if($tempNote === true) {
-                            $data['errorMess'] = 'The note has been created.';
-                        } else {
-                            $data['errorMess'] = 'Something went wrong, please try again.';
-                        }
+                        $data['errorMess'] = 'Something went wrong, please try again.';
                     }
                 }
             }
-
-            // AJAX call in from JS
-
+            // AJAX call in JS
             $this->reloadPage($data);
         }
         
-        // Reopen page Decapricated after AJAX call
+        // Reopen page deprecated after AJAX call
         private function reloadPage($data) {
             $tempErrorMess = $data['errorMess'];
             $notes =  $this->noteModel->getNotesModel($_SESSION['userId']);

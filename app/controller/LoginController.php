@@ -26,9 +26,7 @@
 
         // Empty array 
         private function emptyData() {
-            $data = [
-                'userId' => '', 'userName' => '', 'userPass' => '', 'userEmail' => '', 'userRoll' => '', 'userSalt' => '', 'errorMess' => ''
-            ];
+            $data = ['userId' => '', 'userName' => '', 'userPass' => '', 'userEmail' => '', 'userRoll' => '', 'userSalt' => '', 'errorMess' => ''];
             return $data;
         }
 

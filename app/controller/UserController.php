@@ -25,13 +25,8 @@
 
         // Edit logged in user information
         public function editUser() {
-            $data = [
-                'userId' => $_SESSION['userId'],
-                'userRoll' => $_SESSION['userRoll'],
-                'userName' => $_SESSION['userName'],
-                'userEmail' => $_SESSION['userEmail'],
-                'errorMess' => ''
-            ];
+            $data = ['userId' => $_SESSION['userId'], 'userRoll' => $_SESSION['userRoll'], 'userName' => $_SESSION['userName'], 'userEmail' => $_SESSION['userEmail'], 'errorMess' => ''];
+            
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // check name and validation
                 if(empty($_POST['inputName'])) {
