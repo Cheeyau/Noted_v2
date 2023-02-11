@@ -26,8 +26,8 @@
         </button>
         
         </span>
-        <label  for="inputPayment">How much do you want to donate?  </label>
-        <input class="col-sm-6 form-control" type="text" name="price" id="inputPrice">
+        <label  for="inputPayment">How much do you want to donate in euro's?</label>
+        <span>€</span><input class="col-sm-6 form-control" type="text" name="price" id="inputPrice">
         
         <button type="submit" class="col-sm-6  btn-sm btn-primary btnLogin">
             <a href="<?php echo URLROOT ?>/PaymentController/paymentOverview">Donate</a>
