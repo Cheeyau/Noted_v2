@@ -5,8 +5,8 @@
 
 <main class="row align-self-center ">    
     <section class="row">
-        <h1 class="row col-sm-12 align-self-center H1">Here are all the users who are regristrated!</h1>
-        <h2 class="row col-sm-12 align-self-center">Search uers by name, email address or registration date.</h2>
+        <h1 class="row col-sm-12 align-self-center H1">Here are all the users who are registered!</h1>
+        <h2 class="row col-sm-12 align-self-center">Search users by name, email address or registration date.</h2>
         <section class="row col-sm-10 searchBar"> 
             <form action="<?php echo URLROOT ?>/UserController/searchUserCon" method="GET">
                 <section class="row">

@@ -5,9 +5,9 @@ import {
   checkFormNamePasswordEmail
 } from './template.js';
 
-let inputUser = "inputUserRegis";
-let inputPassword = "inputPasswordRegis";
-let inputEmail = "inputEmailRegis";
+let inputUser = "inputUserReset";
+let inputPassword = "inputPasswordReset";
+let inputEmail = "inputEmailReset";
 
 document.getElementById(inputUser).addEventListener("keyup", function() {
   colorNameInputField(inputUser);
@@ -21,6 +21,6 @@ document.getElementById(inputPassword).addEventListener("keyup", function() {
   colorPasswordInputField(inputPassword);
 });
 
-document.getElementById("registerUserForm").addEventListener("submit", function(event) {
+document.querySelector("#resetPassword").addEventListener("submit", function(event) {
   checkFormNamePasswordEmail(inputUser, inputEmail, inputPassword, "errorMess", event);
 });

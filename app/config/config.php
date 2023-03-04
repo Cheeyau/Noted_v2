@@ -24,7 +24,7 @@
     // define('MAILACCOUNT', 'test');
     // define('MAILPASSWORD', 'test');
 
-    DEFINE("PAYMENTKEY", "test_xqPuQB9Sz4GerN9vpEBA5JFh4SAjAR");
+    define("PAYMENTKEY", "test_xqPuQB9Sz4GerN9vpEBA5JFh4SAjAR");
 
     // local defines
 
@@ -38,7 +38,7 @@
     //APPROOT
     define('APPROOT', dirname(dirname(__FILE__)));
     //URLROOT (Dynamic links)
-    define('URLROOT', 'http://localhost:/noted2');
+    define('URLROOT', 'http://localhost:8080/noted_v2');
     //Sitename
     define('SITENAME', 'Noted V2!');
 

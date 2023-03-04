@@ -1,5 +1,7 @@
 <?php
     class IndexController extends AutoLoader {
+        private IndexModel $indexModel;
+
         public function __construct() {
             $this->indexModel = $this->model('IndexModel');
         }

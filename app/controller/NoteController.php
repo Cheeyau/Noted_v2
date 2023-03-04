@@ -1,5 +1,6 @@
 <?php
     class NoteController extends AutoLoader {
+        private NoteModel $noteModel;
         
         public function __construct() {
             $this->noteModel = $this->model('NoteModel');
@@ -34,7 +35,7 @@
                     if(empty($_GET['textContent'])) {
                         $data['errorMess'] = "Please enter some content in the note to be saved.";
                     } else {
-                        $_GET['textContent'] = filterString($_GET['textContent']);
+                        $_GET['textContent'] = $this->filterString($_GET['textContent']);
                         if($_GET['textContent']=== false) {
                             $data['errorMess'] = "Please enter valid content in the note.";
                         } else {
@@ -89,7 +90,7 @@
                     $data['errorMess'] = "Please enter some content in the note.";
                 }
                 
-                $_POST['textContent'] = filterString($_POST['textContent']);
+                $_POST['textContent'] = $this->filterString($_POST['textContent']);
                 if($_POST['textContent']=== false) {
                     $data['errorMess'] = "Please enter valid content in the note.";
                 } 

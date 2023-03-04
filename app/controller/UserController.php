@@ -1,5 +1,6 @@
 <?php
     class UserController extends AutoLoader {
+        private UserModel $userModel;
 
         // search model with para User
         public function __construct() {
@@ -33,7 +34,7 @@
                     $data['errorMess'] = "Please enter a new name to change.";
                 }
 
-                $_POST['inputName'] = filterString($_POST['inputName']);
+                $_POST['inputName'] = $this->filterString($_POST['inputName']);
                 if($_POST['inputName']=== false) {
                     $data['errorMess'] = "Please enter a valid new name to change.";
                 }
@@ -44,7 +45,7 @@
                     $data['errorMess'] = "Please enter a new name to change.";
                 } 
                 
-                $_POST['inputEmail'] = filterEmail($_POST['inputEmail']);
+                $_POST['inputEmail'] = $this->filterEmail($_POST['inputEmail']);
                 if($_POST['inputEmail']=== false) {
                     $data['errorMess'] = "Please enter a valid new name to change.";
                 } 
@@ -55,7 +56,7 @@
                     $data['errorMess'] = "Please enter a new password to change.";
                 } 
 
-                $_POST['inputPassword'] = filterString($_POST['inputPassword']);
+                $_POST['inputPassword'] = $this->filterString($_POST['inputPassword']);
                 if($_POST['inputPassword']=== false) {
                     $data['errorMess'] = "Please enter a valid new password to change.";
                 } 
@@ -84,10 +85,6 @@
             $_SESSION["userPass"] = $hashPassword;
         }
 
-        // hash password and salt with sha512
-        private function hashPassword(string $passwordAndSalt) {
-            return hash('sha512', $passwordAndSalt);
-        }
         
         // search user on input; name, email or registration date
         public function searchUserCon() {
@@ -115,7 +112,7 @@
                     $tempMonth = str_pad($_GET['inputMonth'], 2, "0", STR_PAD_LEFT);
                     $tempDay = str_pad($_GET['inputDay'], 2, "0", STR_PAD_LEFT);
                     $tempDate = $_GET['inputYear'] . '-' . $tempMonth . '-' . $tempDay;
-                    $tempDate = filterString($tempDate);
+                    $tempDate = $this->filterString($tempDate);
                     if($tempDate === false) {
                         $data['errorMess'] = "Please enter a valid date.";
                     } else {
@@ -134,7 +131,7 @@
                     empty($_GET['inputEmail'])
                 ) {
                     $tempName = $_GET['inputName'];
-                    $tempName = filterString($tempName);
+                    $tempName = $this->filterString($tempName);
                     if($tempName === false) {
                         $data['errorMess'] = "Please enter a valid name.";
                     } else {
@@ -153,7 +150,7 @@
                     empty($_GET['inputName'])
                 ) {
                     $tempEmail = $_GET['inputEmail'];
-                    $tempEmail = filterString($tempEmail);
+                    $tempEmail = $this->filterString($tempEmail);
                     if($tempEmail === false) {
                         $data['errorMess'] = "Please enter a valid Email.";
                     } else {
@@ -164,7 +161,7 @@
                         }
                     }
                 }  
-             }
+                }
             $this->view('/pages/users', $data);
         }
     }

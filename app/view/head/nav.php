@@ -22,7 +22,7 @@
                 if (isset($_SESSION['userRoll'])) {
                     if ($_SESSION['userRoll'] == 1 || $_SESSION['userRoll'] == 2) {
                         echo '<li class="nav-item"><a class="nav-link" href="';
-                        echo URLROOT . '/UserController/getUserCon'. '">Users';
+                        echo URLROOT . '/UserController/index'. '">Users';
                         echo "</a></li>";
                     }
                 }
@@ -31,7 +31,7 @@
                 echo $_SESSION['userName'].'</a></li>';
 
                 echo '<li class="nav-item"><a class="nav-link" href="';
-                echo URLROOT . '//PaymentController/proceedCheckOut">Donate';
+                echo URLROOT . '/PaymentController/proceedCheckOut">Donate';
                 echo '</a></li>';
 
                 // logout button

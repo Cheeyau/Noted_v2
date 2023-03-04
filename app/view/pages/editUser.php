@@ -11,7 +11,7 @@ function determineRoll($data) {
             echo 'Admin';
             break;
         case 2:
-            echo 'Superadmin';
+            echo 'Super admin';
             break;
     }
 }
