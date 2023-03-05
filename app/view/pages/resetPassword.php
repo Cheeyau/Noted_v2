@@ -23,6 +23,6 @@
         
         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
         <button class="btnLogin col-sm-6 btn-primary btn-sm" type="submit" value="submit">send</button>
-        <span class="error " ><?php echo $data["errorMess"] ?></span>
-    </form>    
+        <span class="errorMess " ><?php echo $data["errorMess"] ?></span>
+    </form>
 </main>

@@ -42,6 +42,20 @@
             $this->view('/pages/login', $data);
         }
 
+        public function checkLoginAPI() {
+            if(empty($data['errorMess'])) {
+                // push user to db layer 
+                $data['userPass'] = trim($_POST['userPassword']);
+                $tempUser = $this->loginModel->checkLoginModel($data['userName'], $data['userPass']);
+                
+                if ($tempUser !== false || $tempUser === null) {
+                    $this->setSession($tempUser);
+                } else {
+                    $data['errorMess'] = "The password and user combination is not valid.";
+                }
+            }
+        }
+
         // login validation
         public function login() {
             $data = $this->emptyData();

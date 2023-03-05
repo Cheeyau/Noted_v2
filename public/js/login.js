@@ -1,7 +1,6 @@
 import { 
   colorNameInputField,
-  colorPasswordInputField,
-  checkFormNamePassword
+  colorPasswordInputField
 } from './template.js';
 
 let inputUser = "inputUser";
